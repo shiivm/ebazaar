@@ -1,0 +1,16 @@
+@import "./mixin/_arrow";
+
+.header-main {
+  width: 100%;
+  background-color: #2874f0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: fixed;
+  color: #fff;
+  a {
+    color: #fff;
+  }
+  @import "./logo";
+  @import "./_search-bar";
+  @import "./_nav-options";
+}

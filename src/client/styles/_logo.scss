@@ -1,0 +1,14 @@
+.logo-container {
+    a {
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+        @include text-decoration-none;
+        span {
+            color: white;
+            &:hover {
+                color: red;
+            }
+        }
+    }
+}

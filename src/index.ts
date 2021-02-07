@@ -6,18 +6,26 @@ import renderPage from "./middlewares/renderPage";
 
 const app = express();
 
-/* app.use(function (req, res, next) {
+app.use(function (req, res, next) {
   const jsPattern = /\.[0-9a-zA-Z]{5,25}\.js$/;
+  const cssPattern = /\.[0-9a-z]{5,25}\.css$/;
   var reqType = "page";
   if (jsPattern.test(req.url)) {
     reqType = "static";
     req.url = req.url.replace(jsPattern, ".js");
     if (process.env.NODE_ENV == "production") {
-      res.set("Cache-Control", `public, max-age=${expiryHeaderIntervalJs}`);
+      res.set("Cache-Control", `public, max-age=${31557600}`);
     }
-  }
+  } else if (cssPattern.test(req.url)) {
+    reqType = 'static';
+    req.url = req.url.replace(cssPattern, ".css");
+    if (process.env.NODE_ENV == "production") {
+        res.set("Cache-Control", `public, max-age=${31557600}`);
+        res.set("Expires", `${new Date(Date.now() + parseInt('31557600') * 1000)}`);
+    }
+}
   next();
-}); */
+});
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "public")));

@@ -1,4 +1,5 @@
-import homeConfig from "./page_config/home-config";
+import PageConfig from "../utils/interfaces";
+import homeConfig from "./page-config/home";
 
 const Pages: PageConfig[] = [homeConfig];
 

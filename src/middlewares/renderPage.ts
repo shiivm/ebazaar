@@ -5,10 +5,13 @@ import Routes from '../client/Routes';
 
 const renderPage = (req: Request, res: Response) => {
     const reqPath = req.path;
-    const context = {};
+    const JS_VERSION = Date.now();
+    const context = {
+        JS_VERSION
+    };
     matchRoutes(Routes,reqPath).map(({route,match}) => {
     });
-    console.log("=====================",reqPath);
+    res.setHeader('Content-Type', 'text/html');
     res.send(renderer(reqPath,context))
 };
 

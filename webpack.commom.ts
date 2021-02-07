@@ -1,12 +1,13 @@
-const { NODE_ENV = "development" } = process.env;
-module.exports = {
-  mode: NODE_ENV,
+import webpack from "webpack";
+
+const config: webpack.Configuration = {
+  mode: "production",
   module: {
     rules: [
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: ["babel-loader","ts-loader"],
+        use: ["babel-loader"],
       },
     ],
   },
@@ -14,3 +15,5 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
 };
+
+export default config;

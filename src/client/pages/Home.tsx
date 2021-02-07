@@ -1,11 +1,11 @@
 import React from "react";
-// import StickyHeader from "../components/Common/StickyHeader";
+import Header from "../components/Common/Header";
 import Demo from "../components/Demo";
 
-const Home: React.FC = (props) => {
+const Home: React.FC = () => {
   return (
     <>
-    {/* <StickyHeader /> */}
+    <Header />
       <div id="home">
         <Demo />
       </div>

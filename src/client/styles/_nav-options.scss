@@ -1,0 +1,41 @@
+.nav-container {
+    .login-btn {
+        @include cursor-pointer;
+        color: #2874f0;
+        font-weight: 500;
+        background-color: #fff;
+        border-radius: 2px;
+        height: 32px;
+        padding: 6px 40px;
+        border: 1px solid #dbdbdb;
+
+        &:hover {
+            @include text-decoration-none;
+        }
+    }
+    .more-options {
+        @include cursor-pointer;
+        .caret {
+            @include arrow($color: white);
+            @include arrow-down;
+            margin: 0 0 2px 4px;
+
+            &:hover {
+                @include arrow-up;
+            }
+        }
+    }
+    .cart {
+        @include cursor-pointer;
+        @include text-decoration-none;
+        .cart-icon {
+            width: 16px;
+            height: 16px;
+            margin: 0 8px;
+
+            .cart-icon-path {
+                fill: #fff;
+            }
+        }
+    }
+}

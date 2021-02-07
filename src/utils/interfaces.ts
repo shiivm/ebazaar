@@ -4,3 +4,5 @@ interface PageConfig {
   cssLazyList: string[];
   hydrationComponets: object[];
 };
+
+export default PageConfig;
