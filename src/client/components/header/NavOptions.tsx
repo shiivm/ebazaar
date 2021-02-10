@@ -1,18 +1,32 @@
 import React from "react";
+import PopOver from "../commom/PopOver";
 
 const NavOptions: React.FC = (): JSX.Element => {
+  const moreOptions = [
+    { name: "Customer Service", url: "/support" },
+    { name: "Know More", url: "/about" },
+  ];
+  const loginOptions = [
+    { name: `New Customer?`, url: "/register" },
+    { name: "Account", url: "/accounts" },
+    { name: "Orders", url: "/orders" },
+    { name: "Settings", url: "/settings" },
+  ];
   return (
     <div className="col-lg-4 col-md-4 col-xs-4 nav-container">
       <div className="row">
-        <div className="col">
+        <div className="col login">
           <a href="/login" className="login-btn">
             Login
           </a>
+          <PopOver popOverOptions={loginOptions} />
         </div>
         <div className="col more-options">
           <span>More</span>
           <span className="caret"></span>
+          <PopOver popOverOptions={moreOptions} />
         </div>
+
         <div className="col">
           <a href="/cart" className="cart">
             <strong>Cart</strong>
@@ -28,6 +42,7 @@ const NavOptions: React.FC = (): JSX.Element => {
                 fill="#fff"
               ></path>
             </svg>
+            <span className="cart-value">10</span>
           </a>
         </div>
       </div>

@@ -6,11 +6,15 @@ import { renderRoutes } from "react-router-config";
 import { ChunkExtractor } from "@loadable/server";
 
 import Routes from "../client/Routes";
+import serialize from "serialize-javascript";
+import config from "../config/config";
+
 
 const renderer = (reqPath: string, context: {[key:string]:string|number}) => {
   const statsFile = path.resolve(__dirname, "public", "loadable-stats.json");
   const extractor = new ChunkExtractor({ statsFile });
-  const jsVersion = context.JS_VERSION;
+  const FILE_VERSION = context.FILE_VERSION;
+  const pageType = context.pageType;
 
   const jsx = extractor.collectChunks(
     <StaticRouter location={reqPath} context={context}>
@@ -18,10 +22,13 @@ const renderer = (reqPath: string, context: {[key:string]:string|number}) => {
     </StaticRouter>
   );
   const content = renderToString(jsx);
-  const jsFile = path.resolve("/js", `home.${jsVersion}.js`);
-  const vendorJs = path.resolve("/js", `vendors.${jsVersion}.js`);
-  const cssFile = path.resolve("/css", `home.${jsVersion}.css`);
-  // const fontAwesome = path.resolve("/css", `font-awesome.${jsVersion}.css`);
+  const jsFile = path.resolve("/js", `${pageType}.${FILE_VERSION}.js`);
+  const cssFile = path.resolve("/css", `${pageType}.${FILE_VERSION}.css`);
+
+  const vendorJs = path.resolve("/js", `vendors.${FILE_VERSION}.js`);
+  const headerCss = path.resolve("/css",`header.${FILE_VERSION}.css`);
+  const ebazaarCss = path.resolve("/css",`ebazaar.${FILE_VERSION}.css`);
+  // const fontAwesome = path.resolve("/css", `font-awesome.${FILE_VERSION}.css`);
   // const favicon = path.resolve("/images", "favicon.ico");
 
   const html = `<!DOCTYPE html>
@@ -33,6 +40,8 @@ const renderer = (reqPath: string, context: {[key:string]:string|number}) => {
       <meta name="Description" content="E-Commerce Application">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+      <link rel="stylesheet" href="${headerCss}">
+      <link rel="stylesheet" href="${ebazaarCss}">
       <link rel="stylesheet" href="${cssFile}">
       <title>Ebazaar</title>
     </head>
@@ -41,6 +50,11 @@ const renderer = (reqPath: string, context: {[key:string]:string|number}) => {
       <div id="root">${content}</div>
       <script defer src="${vendorJs}"></script>
       <script defer src="${jsFile}"></script>
+      <script>
+      window.PAGE_TYPE="${pageType}";
+      window.FILE_VERSION="${FILE_VERSION}";
+      window.Config=${serialize({ ...config})}
+      </script>
     </body>
   </html>`;
   return html;

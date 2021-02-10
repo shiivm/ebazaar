@@ -21,21 +21,28 @@
         text-align: left;
         background-color: #fff;
         display: block;
-
-        div {
-            display: block;
-            position: relative;
-            box-sizing: border-box;
-        }
-        #root {
-            height: 100%;
-            width: 100%;
-        }
-        .super_container {
-            width: 100%;
-            overflow: hidden;
-        }
     }
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+.super_container {
+    width: 100% !important;
+    overflow: hidden !important;
+    max-width: 100% !important;
+    margin: 0;
+    padding: 0;
+
+    .content-container {
+        margin-top: 56px;
+    }
+}
+div {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
 }
 
 ul {

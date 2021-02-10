@@ -1,17 +1,28 @@
+@import "./mixin/popover";
 .nav-container {
-    .login-btn {
-        @include cursor-pointer;
-        color: #2874f0;
-        font-weight: 500;
-        background-color: #fff;
-        border-radius: 2px;
-        height: 32px;
-        padding: 6px 40px;
-        border: 1px solid #dbdbdb;
-
-        &:hover {
-            @include text-decoration-none;
+    .login{
+        .login-btn {
+            @include cursor-pointer;
+            color: #2874f0;
+            font-weight: 500;
+            background-color: #fff;
+            border-radius: 2px;
+            height: 32px;
+            padding: 6px 40px;
+            border: 1px solid #dbdbdb;
+    
+            &:hover {
+                @include text-decoration-none;
+            }
         }
+        .tooltiptext {
+            @include popover(150px, 30px,51%);
+        }
+        &:hover .tooltiptext {
+            visibility: visible;
+        }
+        @include popover-options;
+
     }
     .more-options {
         @include cursor-pointer;
@@ -24,10 +35,18 @@
                 @include arrow-up;
             }
         }
+        .tooltiptext {
+            @include popover(150px, 20px,35%);
+        }
+        &:hover .tooltiptext {
+            visibility: visible;
+        }
+        @include popover-options;
     }
     .cart {
         @include cursor-pointer;
         @include text-decoration-none;
+        color: #fff;
         .cart-icon {
             width: 16px;
             height: 16px;
@@ -36,6 +55,15 @@
             .cart-icon-path {
                 fill: #fff;
             }
+        }
+        .cart-value {
+            z-index: 999;
+            margin: 0 0 0 -5px;
+            font-size: small;
+            font-weight: 900;
+            background-color: red;
+            border-radius: 100%;
+            padding: 1px;
         }
     }
 }

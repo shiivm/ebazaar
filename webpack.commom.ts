@@ -1,7 +1,7 @@
 import webpack from "webpack";
 
 const config: webpack.Configuration = {
-  mode: "production",
+  mode: "development",
   module: {
     rules: [
       {

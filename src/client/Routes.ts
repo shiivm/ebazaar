@@ -9,6 +9,7 @@ const Routes:RouteConfig[] =  [
     routes: [
       {
         component: Home,
+        pageType: 'home',
         path: "/",
         exact: true,
       },

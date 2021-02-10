@@ -5,7 +5,7 @@ import commonConfig from "./webpack.commom";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import LoadablePlugin from "@loadable/webpack-plugin";
 import webpack from "webpack";
-import Pages from "./src/config/Pages";
+import Pages from "./src/config/page-config";
 // import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 const jsList: { [key: string]: string[] } = {};
@@ -19,7 +19,7 @@ for (let i in Pages) {
     rootDir,
     "config",
     "page-config",
-    `${fileName}.tsx`
+    `${fileName}.ts`
   );
 
   typeof jsList[lazyFileName] == "undefined" && (jsList[lazyFileName] = []);
@@ -43,34 +43,27 @@ for (let i in Pages) {
       cssList[lazyFileName].push(rootDir + "/" + cssPath);
     });
   }
-  let filePath = path.resolve(
-    rootDir,
-    "client",
-    "page-libs",
-    `${fileName}.tsx`
-  );
-  if (fs.existsSync(filePath)) {
-    jsList[fileName].push(filePath);
+  if (Array.isArray(page.hydrationComponets)) {
+    for (let j in page.hydrationComponets) {
+      let component: { [key: string]: any } = page.hydrationComponets[j];
+      if (component.isLazyLoad) {
+        jsList[lazyFileName].push(rootDir + "/" + component.path);
+      } else {
+        jsList[fileName].push(rootDir + "/" + component.path);
+      }
+    }
   }
-  /* if (Array.isArray(page.hydrationComponets)) {
-		for (var j in page.hydrationComponets) {
-			let component = page.hydrationComponets[j];
-			if(component.isLazyLoad) {
-				jsList[lazyJsName].push(rootDir + component.path);
-			} else {
-				jsList[fileName].push(rootDir + component.path);
-			}
-		}
-	} */
-  jsList[fileName].push(`${rootDir}/client/index.tsx`);
-  jsList[fileName] = Array.from(new Set(jsList[fileName])); // unique
-  jsList[lazyFileName] = Array.from(new Set(jsList[lazyFileName])); // unique
-  cssList[fileName] = Array.from(new Set(cssList[fileName])); // unique
+  if (pageConfigFile && fs.existsSync(pageConfigFile)) {
+    jsList[fileName].push(`${rootDir}/client/index.tsx`);
+  }
+  jsList[fileName] = Array.from(new Set(jsList[fileName]));
+  jsList[lazyFileName] = Array.from(new Set(jsList[lazyFileName]));
+  cssList[fileName] = Array.from(new Set(cssList[fileName]));
   if (
     Array.isArray(cssList[lazyFileName]) &&
     cssList[lazyFileName].length > 0
   ) {
-    cssList[lazyFileName] = Array.from(new Set(cssList[lazyFileName])); // unique
+    cssList[lazyFileName] = Array.from(new Set(cssList[lazyFileName]));
   }
 }
 const entry: { [key: string]: string[] } = {};
@@ -91,6 +84,13 @@ const config: webpack.Configuration = {
     filename: "[name]",
     path: path.resolve(__dirname, "build", "public"),
   },
+  node: {
+    __dirname: false,
+  },
+  watchOptions: {
+		poll: true,
+		ignored: ["node_modules"]
+	},
   module: {
     rules: [
       {
@@ -127,7 +127,7 @@ const config: webpack.Configuration = {
   },
   plugins: [
     new MiniCssExtractPlugin({}),
-    new LoadablePlugin({}),
+    new LoadablePlugin(),
     // new BundleAnalyzerPlugin()
   ],
 };
