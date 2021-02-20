@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import getHydrateDataByType from "./helper/getHydrateData";
-import { HydrationComponets } from "../utils/interfaces";
+import { HydrationComponets, PageConfig } from "../utils/interfaces";
 
 (() => {
   const renderComponent = (component: HydrationComponets) => {
@@ -23,13 +23,13 @@ import { HydrationComponets } from "../utils/interfaces";
       component.attributes || (component.attributes = []);
       const domAttributs = {};
       for (
-        let i = 0, atts = domElement.attributes, n = atts.length, arr = [];
+        let i = 0, atts = domElement.attributes, n = atts.length;
         i < n;
         i++
       ) {
         domAttributs[atts[i].nodeName] = atts[i].nodeValue;
       }
-      let combinedAttributes = { ...component.attributes, ...domAttributs };
+      const combinedAttributes = { ...component.attributes, ...domAttributs };
 
       ReactDOM.hydrate(
         <ComponentObject {...combinedAttributes} />,
@@ -42,15 +42,15 @@ import { HydrationComponets } from "../utils/interfaces";
     if (allRealDivsArray.length > 0) {
       allRealDivsArray.forEach((domElement) => {
         component.attributes || (component.attributes = []);
-        let domAttributs = {};
+        const domAttributs = {};
         for (
-          let i = 0, atts = domElement.attributes, n = atts.length, arr = [];
+          let i = 0, atts = domElement.attributes, n = atts.length;
           i < n;
           i++
         ) {
           domAttributs[atts[i].nodeName] = atts[i].nodeValue;
         }
-        let combinedAttributes = { ...component.attributes, ...domAttributs };
+        const combinedAttributes = { ...component.attributes, ...domAttributs };
         ReactDOM.hydrate(
           <ComponentObject {...combinedAttributes} />,
           domElement
@@ -59,9 +59,11 @@ import { HydrationComponets } from "../utils/interfaces";
     }
   };
   const pageType = window.PAGE_TYPE || "";
-  const FILE_VERSION = window.FILE_VERSION || "";
-  const pageConfig: { [key: string]: any } = getHydrateDataByType(pageType);
-  const hydrationComponets = pageConfig.hydrationComponets || [];
+  const FILE_VERSION = window?.FILE_VERSION || "";
+  const pageConfig: { [key: string]: PageConfig } = getHydrateDataByType(
+    pageType
+  );
+  const hydrationComponets = pageConfig?.hydrationComponets || [];
   const lazyComponents = [];
   hydrationComponets.forEach((component: HydrationComponets) => {
     if (component.isLazyLoad) {
@@ -81,10 +83,9 @@ import { HydrationComponets } from "../utils/interfaces";
       if (lazyComponents.length > 0) {
         document.getElementsByTagName("body")[0].appendChild(lazScript);
       }
-    },2000);
+    }, 2000);
   });
   lazScript.addEventListener("load", function () {
-
     lazyComponents.forEach((component) => {
       if (component.isLazyLoad) {
         renderComponent(component);

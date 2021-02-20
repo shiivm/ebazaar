@@ -3,7 +3,7 @@ import renderer from "../utils/renderer";
 import { matchRoutes } from "react-router-config";
 import Routes from "../client/Routes";
 
-const renderPage = (req: Request, res: Response) => {
+const renderPage = (req: Request, res: Response):void => {
   const reqPath = req.path;
   const FILE_VERSION = 1234567;
   // const promises:Promise[] = [];

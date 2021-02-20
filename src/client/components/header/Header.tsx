@@ -4,7 +4,7 @@ import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import NavOptions from "./NavOptions";
 
-const Header: React.FC = (): JSX.Element => {
+const Header = (): JSX.Element => {
   return (
     <div className="header-main">
       <div className="container">

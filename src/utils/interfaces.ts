@@ -4,9 +4,9 @@ declare global {
     _pageConfig: PageConfig[];
     Component: HydrationComponets;
     FILE_VERSION: string;
-    Config:{[key:string]:any}
+    Config:{[key:string]:string|number|undefined}
   }
-};
+}
 
 export interface HydrationComponets {
   name: string;
@@ -14,7 +14,7 @@ export interface HydrationComponets {
   domClassName?: string;
   domId?: string;
   isLazyLoad?: boolean;
-  attributes?: {};
+  attributes?: Record<string, unknown>;
 }
 
 export interface PageConfig {

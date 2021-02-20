@@ -2,6 +2,7 @@ import path from "path";
 import { merge } from "webpack-merge";
 import commonConfig from "./webpack.commom";
 import nodeExternals from "webpack-node-externals";
+import Dotenv from "dotenv-webpack";
 import webpack from "webpack";
 
 const config: webpack.Configuration = {
@@ -12,5 +13,32 @@ const config: webpack.Configuration = {
   },
   target: "node",
   externals: [nodeExternals()],
+  watchOptions: {
+    poll: true,
+  },
+  node: {
+    __dirname: false,
+  },
+  plugins: [new Dotenv({
+    path: './.env',
+    systemvars: true,
+    defaults: false
+  })],
+  module: {
+    rules: [
+      {
+        test: [/\.svg$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        use: ["file-loader"],
+      },
+      {
+				test: /\.css$/,
+				use: [
+					{
+						loader: "css-loader/locals"
+					}
+				]
+			},
+    ]
+  }
 };
 module.exports = merge(commonConfig, config);

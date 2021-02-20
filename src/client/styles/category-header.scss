@@ -25,7 +25,7 @@
     }
     .category{
         .tooltiptext {
-            @include popover(150px, 20px,49%);
+            @include popover(180px, 20px,54%);
         }
         &:hover .tooltiptext {
             visibility: visible;

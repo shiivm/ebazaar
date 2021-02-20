@@ -1,14 +1,158 @@
 import React from "react";
-import Demo from "../components/Demo";
-import CategoryHeader from '../components/home/CategoryHeader';
+import CategoryHeader from "../components/home/CategoryHeader";
+import Carousel from "../components/carousel/Carousel";
+import Card from "../components/commom/Card";
+import Footer from "../components/commom/Footer";
+import Header from "../components/header/Header";
 
-const Home: React.FC = () => {
+const Home = (): JSX.Element => {
+  const carouselSlidesData = [
+    {
+      content:
+        "Tomorrow, you will be released. If you are bored of brawling with thieves and want to achieve something there is a rare blue flower that grows on the eastern slopes. Pick one of these flowers. If you can carry it to the top of the mountain, you may find what you were looking for in the first place.",
+      image: "banner.jpg",
+    },
+    {
+      content:
+        "You have learn to bury your guilt with anger. I will teach you to confront it and to face the truth.",
+      image: "banner2.jpg",
+    },
+    {
+      content:
+        "Introduce a little anarchy, upset the established order and everything becomes chaos. I'm an agent of chaos. Oh, and you know the thing about chaos? It's fair.",
+      image: "banner3.jpg",
+    },
+    {
+      content:
+        "I can't do that as Bruce Wayne... as a man. I'm flesh and blood. I can be ignored, destroyed. But as a symbol, I can be incorruptible, I can be everlasting.",
+      image: "banner4.jpg",
+    },
+    {
+      content:
+        "But it's not who you are underneath... it's what you do that defines you.",
+      image: "banner5.jpg",
+    },
+    {
+      content:
+        "When their enemies were at the gates the Romans would suspend democracy and appoint one man to protect the city. It wasn't considered an honor, it was a public service.",
+      image: "banner3.jpg",
+    },
+    {
+      content:
+        "Master Wayne, you've been gone a long time. You look very fashionable. Apart from the mud.",
+      image: "banner4.jpg",
+    },
+  ];
+
   return (
     <>
-    <CategoryHeader />
-    <div id="home" className="row">
-      <Demo client = "server" />
-    </div>
+      <Header />
+      <CategoryHeader />
+      <div className="page-container col">
+        <div id="home-carousel" className="carousel-container">
+          <Carousel slides={carouselSlidesData} />
+        </div>
+        <div className="col category-row">
+          <h2>Deals of the Day</h2>
+          <div className="top-offers">
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/shoe.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/shoe.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/shoe.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/shoe.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/shoe.jpeg"
+            />
+            <a href="./best-deals" className="col-1 top-offers--see-all">
+              See all
+            </a>
+          </div>
+        </div>
+        <div className="col category-row">
+          <h2>Shop By Category</h2>
+          <div className="top-offers">
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/watch.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/watch.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/watch.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/watch.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/watch.jpeg"
+            />
+            <a href="./categories" className="col-1 top-offers--see-all">
+              See all
+            </a>
+          </div>
+        </div>
+        <div className="col category-row">
+          <h2>Top Products</h2>
+          <div className="top-offers">
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/webcam.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/webcam.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/webcam.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/webcam.jpeg"
+            />
+            <Card
+              description="Some example text. Some example text."
+              class_name="top-offers--card col-2"
+              imageUrl="./images/webcam.jpeg"
+            />
+            <a href="./top-products" className="col-1 top-offers--see-all">
+              See all
+            </a>
+          </div>
+        </div>
+      </div>
+      <Footer />
     </>
   );
 };

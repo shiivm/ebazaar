@@ -1,9 +1,11 @@
+import { PageConfig } from "../../utils/interfaces";
+
 const pageConfig = window._pageConfig;
 
-const getHydrateDataByType = (type: string) => {
+const getHydrateDataByType = (type: string):PageConfig => {
   const pages = Array.from(pageConfig);
-  let currentPage = pages.find(
-    (page: { [key: string]: any }) => page.type == type
+  const currentPage = pages.find(
+    (page: { [key: string]: string }) => page.type == type
   );
   return currentPage ?? [];
 };

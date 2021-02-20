@@ -1,12 +1,9 @@
 import express from "express";
 import path from "path";
+import compression from "compression";
 
 import errorHandler from "./middlewares/errorHandler";
 import renderPage from "./middlewares/renderPage";
-
-if (!(process.env.NODE_ENV && process.env.NODE_ENV == "production")) {
-  require("dotenv").config();
-}
 
 const app = express();
 
@@ -30,6 +27,7 @@ app.use(function (req, res, next) {
   }
   next();
 });
+app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "public")));

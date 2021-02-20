@@ -10,7 +10,7 @@ import serialize from "serialize-javascript";
 import config from "../config/config";
 
 
-const renderer = (reqPath: string, context: {[key:string]:string|number}) => {
+const renderer = (reqPath: string, context: {[key:string]:string|number}):string => {
   const statsFile = path.resolve(__dirname, "public", "loadable-stats.json");
   const extractor = new ChunkExtractor({ statsFile });
   const FILE_VERSION = context.FILE_VERSION;
@@ -22,14 +22,14 @@ const renderer = (reqPath: string, context: {[key:string]:string|number}) => {
     </StaticRouter>
   );
   const content = renderToString(jsx);
-  const jsFile = path.resolve("/js", `${pageType}.${FILE_VERSION}.js`);
-  const cssFile = path.resolve("/css", `${pageType}.${FILE_VERSION}.css`);
+  const jsFile = config.BASE_URL+ path.resolve("/static/js", `${pageType}.${FILE_VERSION}.js`);
+  const cssFile = config.BASE_URL+ path.resolve("/static/css", `${pageType}.${FILE_VERSION}.css`);
 
-  const vendorJs = path.resolve("/js", `vendors.${FILE_VERSION}.js`);
-  const headerCss = path.resolve("/css",`header.${FILE_VERSION}.css`);
-  const ebazaarCss = path.resolve("/css",`ebazaar.${FILE_VERSION}.css`);
-  // const fontAwesome = path.resolve("/css", `font-awesome.${FILE_VERSION}.css`);
-  // const favicon = path.resolve("/images", "favicon.ico");
+  const vendorJs = config.BASE_URL+ path.resolve("/static/js", `vendors.${FILE_VERSION}.js`);
+  const headerCss = config.BASE_URL+ path.resolve("/static/css",`header.${FILE_VERSION}.css`);
+  const ebazaarCss = config.BASE_URL+ path.resolve("/static/css",`ebazaar.${FILE_VERSION}.css`);
+  // const fontAwesome = config.BASE_URL+ path.resolve("/static/css", `font-awesome.${FILE_VERSION}.css`);
+  // const favicon = config.BASE_URL+ path.resolve("/static/images", "favicon.ico");
 
   const html = `<!DOCTYPE html>
   <html lang="en">

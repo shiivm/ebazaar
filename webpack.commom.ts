@@ -1,7 +1,8 @@
 import webpack from "webpack";
 
+const mode = process.env.NODE_ENV || "development";
 const config: webpack.Configuration = {
-  mode: "development",
+  mode: mode == "production" ? "production" : "development",
   module: {
     rules: [
       {
@@ -13,7 +14,14 @@ const config: webpack.Configuration = {
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
+    fallback: {
+      path: false,
+      fs: false,
+      process: false,
+    },
   },
 };
+
+if (mode != "production") config["devtool"] = "eval-cheap-source-map";
 
 export default config;

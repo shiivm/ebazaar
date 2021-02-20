@@ -84,6 +84,7 @@ const config: webpack.Configuration = {
     filename: "[name]",
     path: path.resolve(__dirname, "build", "public"),
   },
+  target: ['web', 'es5'],
   node: {
     __dirname: false,
   },
@@ -123,9 +124,10 @@ const config: webpack.Configuration = {
         },
       },
     },
-    minimize: true,
+    minimize: false,
   },
   plugins: [
+    new webpack.DefinePlugin({'process.env.BROWSER': false}),
     new MiniCssExtractPlugin({}),
     new LoadablePlugin(),
     // new BundleAnalyzerPlugin()

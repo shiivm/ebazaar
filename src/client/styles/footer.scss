@@ -1,0 +1,51 @@
+.footer {
+    background-color: #172337;
+    color: #fff;
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+    padding: 40px 10px;
+    bottom: 0;
+    display: flex;
+    .row {
+        margin-left: 65px;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    &--heading {
+        color: #878787;
+        font-size: 12px;
+        font-weight: 400;
+        margin-bottom: 9px;
+    }
+    &--option {
+        line-height: 2;
+        font-size: 13px;
+        font-weight: 500;
+        color: #fff;
+        display: block;
+        font-weight: 400;
+        font-size: 12px;
+        width: 100px;
+        a {
+            line-height: 2;
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            display: block;
+            font-weight: 400;
+            font-size: 12px;
+        }
+    }
+    .address {
+        font-size: 12px;
+        white-space: nowrap;
+        border-left: 1px solid #454d5e;
+        p {
+            margin: 0;
+            padding: 0;
+            line-height: 2;
+        }
+    }
+}

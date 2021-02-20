@@ -10,6 +10,7 @@ const NavOptions: React.FC = (): JSX.Element => {
     { name: `New Customer?`, url: "/register" },
     { name: "Account", url: "/accounts" },
     { name: "Orders", url: "/orders" },
+    { name: "wishlist", url: "/wishlist" },
     { name: "Settings", url: "/settings" },
   ];
   return (
